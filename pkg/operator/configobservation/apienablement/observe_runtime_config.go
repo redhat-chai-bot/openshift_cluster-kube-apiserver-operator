@@ -15,7 +15,11 @@ import (
 	"github.com/openshift/library-go/pkg/operator/events"
 )
 
-var defaultGroupVersionsByFeatureGate = map[configv1.FeatureGateName][]groupVersionByOpenshiftVersion{}
+var defaultGroupVersionsByFeatureGate = map[configv1.FeatureGateName][]groupVersionByOpenshiftVersion{
+	"ClusterTrustBundle": {
+		{KubeVersionRange: semver.MustParseRange(">=1.33.0"), GroupVersion: schema.GroupVersion{Group: "certificates.k8s.io", Version: "v1beta1"}},
+	},
+}
 
 type groupVersionByOpenshiftVersion struct {
 	schema.GroupVersion
